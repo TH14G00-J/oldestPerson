@@ -1,15 +1,43 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import entities.Person;
+
+import java.util.Scanner;
+
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner sc = new Scanner(System.in);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        System.out.print("How many people will you enter? ");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        Person[] people = new Person[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.printf("Data for person %d:%n", i + 1);
+
+            System.out.print("Name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Age: ");
+            int age = sc.nextInt();
+            sc.nextLine();
+
+            people[i] = new Person(name, age);
         }
+
+        int maxAge = -1;
+        String oldestName = "";
+
+        for (Person p : people) {
+            if (p.getAge() > maxAge) {
+                maxAge = p.getAge();
+                oldestName = p.getName();
+            }
+        }
+
+        System.out.println("OLDEST PERSON: " + oldestName);
+
+        sc.close();
     }
 }
